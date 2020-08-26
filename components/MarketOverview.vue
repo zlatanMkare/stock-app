@@ -21,7 +21,7 @@
 
                     <v-card-actions>
                         <nuxt-link :to="'/stock?id=' + stock.quote.symbol">
-                            <v-btn text>More</v-btn>
+                            <v-btn color="white" small text>More <v-icon small>mdi-chevron-right</v-icon></v-btn>
                         </nuxt-link>
                     </v-card-actions>
                 </v-card>

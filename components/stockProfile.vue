@@ -1,23 +1,37 @@
 <template>
-    <div class="container">
-        <h2 class="my-5">Stock profile: {{ this.company.companyName }}</h2>
-        <h3>Overview of the last 30 days</h3>
-        <div class="my-5">
-            <chart></chart>
-        </div>
-        <br>
-        <h2>Stock details:</h2>
-        <br>
-        <p><strong>CEO:</strong> {{ this.company.CEO }}</p>
-        <p><strong>Industry:</strong> {{ this.company.industry }}</p>
-        <p><strong>Security Name:</strong> {{ this.company.securityName }}</p>
-        <p><strong>Website:</strong> <a target="_blank" :href="this.company.website">{{this.company.website}}</a> </p>
-        <p><strong>Exchange:</strong> {{ this.company.exchange }}</p>
-        <p><strong>Employees:</strong> {{ this.company.employees }}</p>
-        <br>
-        <h3 class="mb-5">About</h3>
-        <p>{{ this.company.description }}</p>
-    </div>
+    <v-container>
+        <v-row>
+            <v-col md="12">
+                <div class="float-left">
+                    <h2 class="mb-5 mt-0">Stock profile: {{ this.company.companyName }}</h2>
+                    <h3>Overview of the last 30 days</h3>
+                </div>
+                <div class="float-right">
+                    <v-btn small color="primary" :to="'/'">
+                        Back <v-icon small>mdi-chevron-right</v-icon>
+                    </v-btn>
+                </div>
+            </v-col>
+
+            <v-col cols="12" class="my-5">
+                <chart></chart>
+            </v-col>
+           
+            <v-col cols="12">
+                <h2>Stock details:</h2>
+                <br>
+                <p><strong>CEO:</strong> {{ this.company.CEO }}</p>
+                <p><strong>Industry:</strong> {{ this.company.industry }}</p>
+                <p><strong>Security Name:</strong> {{ this.company.securityName }}</p>
+                <p><strong>Website:</strong> <a target="_blank" :href="this.company.website">{{this.company.website}}</a> </p>
+                <p><strong>Exchange:</strong> {{ this.company.exchange }}</p>
+                <p><strong>Employees:</strong> {{ this.company.employees }}</p>
+                <br>
+                <h3 class="mb-5">About</h3>
+                <p>{{ this.company.description }}</p>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>

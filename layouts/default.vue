@@ -75,13 +75,13 @@ export default {
         {
           icon: 'mdi-chart-bubble',
           title: 'About',
-          to: '/inspire'
+          to: '/about'
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Stocks App'
+      title: 'Stock Watch App'
     }
   }
 }
