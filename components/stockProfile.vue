@@ -17,17 +17,21 @@
                 <chart></chart>
             </v-col>
            
-            <v-col cols="12">
-                <h2>Stock details:</h2>
-                <br>
-                <p><strong>CEO:</strong> {{ this.company.CEO }}</p>
-                <p><strong>Industry:</strong> {{ this.company.industry }}</p>
-                <p><strong>Security Name:</strong> {{ this.company.securityName }}</p>
-                <p><strong>Website:</strong> <a target="_blank" :href="this.company.website">{{this.company.website}}</a> </p>
-                <p><strong>Exchange:</strong> {{ this.company.exchange }}</p>
-                <p><strong>Employees:</strong> {{ this.company.employees }}</p>
-                <br>
-                <h3 class="mb-5">About</h3>
+           <v-col cols="4">
+               <v-card class="pa-4">
+                    <h2>Stock details:</h2>
+                    <br>
+                    <p><strong>CEO:</strong> {{ this.company.CEO }}</p>
+                    <p><strong>Industry:</strong> {{ this.company.industry }}</p>
+                    <p><strong>Security Name:</strong> {{ this.company.securityName }}</p>
+                    <p><strong>Website:</strong> <a target="_blank" :href="this.company.website">{{this.company.website}}</a> </p>
+                    <p><strong>Exchange:</strong> {{ this.company.exchange }}</p>
+                    <p><strong>Employees:</strong> {{ this.company.employees }}</p>
+                </v-card>
+           </v-col>
+
+            <v-col cols="8">
+                <h2 class="mb-5">About</h2>
                 <p>{{ this.company.description }}</p>
             </v-col>
         </v-row>
@@ -63,10 +67,6 @@ export default {
                 }
             }
         }
-    },
-
-    created () {
-        
     }
 }
 </script>

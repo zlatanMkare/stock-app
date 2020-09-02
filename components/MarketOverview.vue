@@ -1,17 +1,26 @@
 <template>
     <div class="col-md-12">
-        <v-flex class="col-md-12">
-            <p class="mb-1">Market overview</p>
-            <h1>Today's marketing briefing.</h1>
-        </v-flex>    
-
         <v-row class="col-md-12">
-            <v-col col cols="12" sm="6" md="4" v-for="(stock, index) in getStock" :key="index">
-                <v-card dark color="#385F73" outlined>
+            <div class="col-md-8">
+                <p class="mb-1">Market overview</p>
+                <h1>Today's marketing briefing.</h1>  
+            </div>
+            <div v-if="getStock" class="col-md-4">
+                <div class="colors mt-3 float-right">
+                    <a @click.prevent="changeColor1()"><div id="purple" class="color"></div></a>
+                    <a @click.prevent="changeColor2()"><div id="orange" class="color"></div></a>
+                    <a @click.prevent="changeColor3()"><div id="lime" class="color"></div></a>
+                </div>
+            </div>
+        </v-row>    
+
+        <v-row class="col-md-12" v-if="getStock">
+            <v-col col cols="12" sm="6" md="4" v-for="stock in getStock" :key="stock.id">
+                <v-card dark :color="bgColor" outlined>
                     <v-list-item three-line>
                     <v-list-item-content>
                         <div class="overline mb-4">{{stock.quote.companyName}}</div>
-                        <v-list-item-title class="headline mb-1">{{stock.quote.symbol}}</v-list-item-title>
+                        <v-list-item-title class="headline mb-1">{{ stock.company.symbol }}</v-list-item-title>
                     </v-list-item-content>
                     <v-list-item-content class="text-right">
                         <small :class="color(stock.quote.changePercent*100)"><v-icon :class="color(stock.quote.changePercent*100)">{{icon}}</v-icon> {{stock.quote.changePercent*100 | roundOff}} %</small>
@@ -32,6 +41,7 @@
 </template>
 
 <script>
+import store from "vuex";
 import { mapGetters } from "vuex";
 
 export default {
@@ -43,8 +53,20 @@ export default {
 
     computed: {
         ...mapGetters([
-            'getStock'
+            'getStock',
+            'getCardColor'
         ]),
+
+        bgColor: {
+            get () {
+                return this.getCardColor;
+            },
+            set (newValue) {
+                if(newValue != this.getCardColor) {
+                    //this.$store.commit('updateFixedCost', { fixedCost: newValue });            
+                }
+            }
+        }
     },
 
     mounted () {
@@ -55,13 +77,22 @@ export default {
         color(value) {
             if (value <= 1) {
                 this.icon = 'mdi-menu-down';
-                return 'red--text';
-                
+                return 'red--text';     
             } else {
                 this.icon = 'mdi-menu-up';
                 return 'green--text';
             }
-        }   
+        },
+        
+        changeColor1() {
+            this.$store.commit('CHANGE_COLOR', '#6A1B9A');
+        },
+        changeColor2() {
+            this.$store.commit('CHANGE_COLOR', '#FFA726');
+        },
+        changeColor3() {
+            this.$store.commit('CHANGE_COLOR', '#D4E157');
+        }
     },
 
     filters: {
@@ -72,6 +103,24 @@ export default {
 }
 </script>
 
-<style scoped>
-    
+<style lang="scss" scoped>
+    .colors {
+        .color {
+            background: #eee;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin: 5px;
+            display: inline-block;
+        }
+        #purple {
+            background: #6A1B9A;
+        }
+        #orange {
+            background: #FFA726;
+        }
+        #lime {
+            background: #D4E157;
+        }
+    }
 </style>
