@@ -7,15 +7,16 @@
             </div>
             <div v-if="getStock" class="col-md-4">
                 <div class="colors mt-3 float-right">
+                    <a @click.prevent="changeColorDefault()"><div id="default" class="color"></div></a>
                     <a @click.prevent="changeColor1()"><div id="purple" class="color"></div></a>
-                    <a @click.prevent="changeColor2()"><div id="orange" class="color"></div></a>
-                    <a @click.prevent="changeColor3()"><div id="lime" class="color"></div></a>
+                    <a @click.prevent="changeColor2()"><div id="indigo" class="color"></div></a>
+                    <a @click.prevent="changeColor3()"><div id="teal" class="color"></div></a>
                 </div>
             </div>
         </v-row>    
 
         <v-row class="col-md-12" v-if="getStock">
-            <v-col col cols="12" sm="6" md="4" v-for="stock in getStock" :key="stock.id">
+            <v-col col cols="12" sm="6" md="4" v-for="(stock, index) in getStock" :key="index">
                 <v-card dark :color="bgColor" outlined>
                     <v-list-item three-line>
                     <v-list-item-content>
@@ -29,11 +30,13 @@
                     </v-list-item>
 
                     <v-card-actions>
-                        <nuxt-link :to="'/stock?id=' + stock.quote.symbol">
-                            <v-btn color="white" small text>More <v-icon small>mdi-chevron-right</v-icon></v-btn>
-                        </nuxt-link>
+                        <v-btn :to="'/stock?id=' + index" color="info" small>More <v-icon small>mdi-chevron-right</v-icon></v-btn>
                     </v-card-actions>
                 </v-card>
+            </v-col>
+
+            <v-col cols="12">
+                <v-btn color="success" large>Add more <v-icon small>mdi-plus</v-icon></v-btn>
             </v-col>
         </v-row>
           
@@ -60,11 +63,6 @@ export default {
         bgColor: {
             get () {
                 return this.getCardColor;
-            },
-            set (newValue) {
-                if(newValue != this.getCardColor) {
-                    //this.$store.commit('updateFixedCost', { fixedCost: newValue });            
-                }
             }
         }
     },
@@ -83,15 +81,17 @@ export default {
                 return 'green--text';
             }
         },
-        
+        changeColorDefault() {
+            this.$store.commit('CHANGE_COLOR', '#385f73');
+        },
         changeColor1() {
             this.$store.commit('CHANGE_COLOR', '#6A1B9A');
         },
         changeColor2() {
-            this.$store.commit('CHANGE_COLOR', '#FFA726');
+            this.$store.commit('CHANGE_COLOR', '#3949AB');
         },
         changeColor3() {
-            this.$store.commit('CHANGE_COLOR', '#D4E157');
+            this.$store.commit('CHANGE_COLOR', '#00897B');
         }
     },
 
@@ -107,20 +107,23 @@ export default {
     .colors {
         .color {
             background: #eee;
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             border-radius: 50%;
-            margin: 5px;
+            margin: 3px;
             display: inline-block;
+        }
+        #default {
+            background: #385f73;
         }
         #purple {
             background: #6A1B9A;
         }
-        #orange {
-            background: #FFA726;
+        #indigo {
+            background: #3949AB;
         }
-        #lime {
-            background: #D4E157;
+        #teal {
+            background: #00897B;
         }
     }
 </style>

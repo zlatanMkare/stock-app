@@ -45,7 +45,7 @@ const createStore = () => {
             
             fetchStock({commit}) {
                 return new Promise ((resolve, reject) => {
-                    let url = 'https://cloud.iexapis.com/stable/stock/market/batch?types=quote,company,chart&symbols=aapl,twtr,luv,dal,fb,googl&token=pk_f39cf95ab9b645cea5407da6faea85b1';
+                    let url = 'https://sandbox.iexapis.com/stable/stock/market/batch?types=quote,company,chart&symbols=aapl,twtr,luv,dal,fb,googl&token=Tpk_78a5a2841df04ee997c14caced1a4449';
                     http.get(url).then( (response) => {
                         commit('SET_STOCK', response.data)
                         resolve()
@@ -56,7 +56,7 @@ const createStore = () => {
             },
 
             fetchNews({commit}) {
-                let url = 'https://cloud.iexapis.com/stable/stock/market/batch?types=news&token=pk_f39cf95ab9b645cea5407da6faea85b1';
+                let url = 'https://sandbox.iexapis.com/stable/stock/market/batch?types=news&token=Tpk_78a5a2841df04ee997c14caced1a4449';
                 http.get(url).then( (response) => {
                     commit('SET_NEWS', response.data);
                 });

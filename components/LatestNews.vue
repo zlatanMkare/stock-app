@@ -8,10 +8,9 @@
         <v-flex class="col-md-12">
             <div class="col-md-12 row elevation-0 mb-8" v-for="news in getNews.news" :key="news.news">
                 <div class="col-md-4">
-                    <v-img
-                    :src="news.image"
-                    >
-                    <v-card-title></v-card-title>
+                    <!-- <v-img :src="news.image"> -->
+                    <v-img class="newsImg" src="https://placeimg.com/640/480/any">
+                        <v-card-title></v-card-title>
                     </v-img>
                 </div>
 
@@ -20,8 +19,7 @@
                     <small>{{news.source}} | {{ news.datetime | date }}</small>
                     <p class="text--primary">{{ news.summary | truncate }}</p>
                     <v-btn
-                        color="purple"
-                        text
+                        color="info"
                         :href="news.url"
                         target="_blank"
                     >
@@ -38,11 +36,6 @@
 import { mapGetters } from "vuex";
 
 export default {
-    data() {
-        return {
-        } 
-    },
-
     computed: {
       ...mapGetters([
           'getNews'
@@ -66,5 +59,7 @@ export default {
 </script>
 
 <style scoped>
-    
+    .newsImg {
+        border-radius: 5px;
+    }
 </style>
